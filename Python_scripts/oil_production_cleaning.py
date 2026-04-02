@@ -1,7 +1,9 @@
-#Import libraries and dataset
+#Import libraries and dataset in datasets folder
 import pandas as pd
 import numpy as np
-production = pd.read_csv('oil-production-by-country.csv')
+import os
+print('Current working directory:', os.getcwd())
+production = pd.read_csv('./Data_science_final_project/Datasets/oil-production-by-country.csv')
 print(production.head())
 #Remove empty rows and columns
 production.dropna(inplace=True)
