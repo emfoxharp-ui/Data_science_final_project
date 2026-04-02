@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import os
 print('Current working directory:', os.getcwd())
-production = pd.read_csv('./Data_science_final_project/Datasets/oil-production-by-country.csv')
+production = pd.read_csv('./Data_science_final_project/Datasets/Original_datasets/oil-production-by-country.csv')
 print(production.head())
 #Remove empty rows and columns
 production.dropna(inplace=True)
@@ -22,4 +22,4 @@ production = production['Oil'].mean().reset_index()
 production = production.sort_values(by = 'Oil',ascending=False)
 print(production)
 #Save cleaned dataset to new csv file
-production.to_csv('cleaned_oil_production_by_country.csv', index=False)
+production.to_csv('./Data_science_final_project/Datasets/Cleaned_datasets/cleaned_oil_production_by_country.csv', index=False)

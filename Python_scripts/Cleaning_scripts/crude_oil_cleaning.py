@@ -1,7 +1,7 @@
 # Import libraries and dataset from datasets folder
 import numpy as np
 import pandas as pd
-crude_oil = pd.read_csv('./Data_science_final_project/Datasets/crude_oil_data.csv')
+crude_oil = pd.read_csv('./Data_science_final_project/Datasets/Original_datasets/crude_oil_data.csv')
 #Check info and print head
 print(crude_oil.info())
 print(crude_oil.head())
@@ -17,4 +17,4 @@ crude_oil = crude_oil[crude_oil['Date'] >= '2021-01-01']
 print(crude_oil)
 print(crude_oil.shape)
 #save cleaned dataset to new csv file
-crude_oil.to_csv('./Data_science_final_project/Datasets/cleaned_crude_oil_data.csv', index=False)
+crude_oil.to_csv('./Data_science_final_project/Datasets/Cleaned_datasets/cleaned_crude_oil_data.csv', index=False)

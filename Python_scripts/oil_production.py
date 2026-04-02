@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 # import dataset from datasets folder
-production = pd.read_csv('./Data_science_final_project/Datasets/cleaned_oil_production_by_country.csv')
+production = pd.read_csv('./Data_science_final_project/Datasets/Cleaned_datasets/cleaned_oil_production_by_country.csv')
 #pie chart of top oil producing countries
 top_countries = production.head(5)
 other_countries = {'Entity': 'Other', 'Oil': production['Oil'].iloc[len(top_countries):].sum()}
