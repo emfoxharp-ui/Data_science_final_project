@@ -15,13 +15,13 @@ table.dropna(inplace=True)
 top_artists = table[['Artist', 'Streams']]
 #Rename streams columns to include that its in millions
 top_artists.rename(columns={'Streams': 'Streams (millions)'}, inplace=True)
-print(top_artists.head(25))
+print(top_artists.head(15))
 #save cleaned dataset to new csv file
 #For analysis, we want only english speaking artists,so we need to remove Bad Bunny, BTS, J Balvin and Ozuna as their song lyrics arent always English
 top_artists.drop(top_artists[top_artists['Artist'].isin(['Bad Bunny', 'BTS', 'J Balvin', 'Ozuna'])].index, inplace=True)
 print(top_artists.head(20))
-#Limit to just the top 20 artists
-top_artists = top_artists.head(20)
+#Limit to just the top 10 artists
+top_artists = top_artists.head(10)
 print(top_artists.info())
 print(top_artists)
 top_artists.to_csv('./Data_science_final_project/Datasets/Cleaned_datasets/cleaned_top_spotify_artists.csv')
