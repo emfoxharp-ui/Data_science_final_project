@@ -11,7 +11,7 @@ print(top_artists.info())
 top_artists.sort_values('Streams (millions)', ascending = True, inplace=True)
 #make the bar graph with artist names on the y axis and total streams on the x axis
 plt.figure()
-plt.barh(top_artists['Artist'], top_artists['Streams (millions)'], color = 'red')
+plt.barh(top_artists['Artist'], top_artists['Streams (millions)'], color = 'lightgreen')
 
 #add labels, title and gridlines
 plt.xlabel('Total Streams (millions)', fontweight = 'bold')
