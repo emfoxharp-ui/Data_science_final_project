@@ -6,7 +6,9 @@ This Project explores the lyrics of the top songs from the top English speaking 
 The codes are numbered in the order in which they need to be run, as some use output from others and therefore need to be run in a specific order. 
 
 The first scripts that need to be run are from the Webscraping_scripts folder, which both collect the data and clean it:
-1) Run 1_web_scraping_artists.py to produce a csv file with the top 20 english speaking artists (this csv is also already within the folder)
-2) Run 2_webscraping_artist_info.py. This file adds the top song from each of the top artists to the dataframe.
+1) Run 1_web_scraping_artists.py to produce a csv file with the top 10 english speaking artists (this csv is also already within the folder)
+2) Run 2_webscraping_artist_top_song.py. This file adds the top song from each of the top artists to the dataframe.
+3) Next run mannually_adding_info.py to add the genders of artists to the dataset
+4) Run webscraping_lyrics.py
 
 To make the outputs, run the scripts from the outputs folder. The scripts are labelled to tell you which script produces which output, and these scripts do not need to be run in a specific order, but do need to be run after the webscraping scripts.

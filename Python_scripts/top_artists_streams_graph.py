@@ -16,7 +16,7 @@ plt.barh(top_artists['Artist'], top_artists['Streams (millions)'], color = 'ligh
 #add labels, title and gridlines
 plt.xlabel('Total Streams (millions)', fontweight = 'bold')
 plt.ylabel('Artist', fontweight = 'bold')
-plt.title('Top 20 Spotify Artists and their Total Streams', color = 'black', fontsize = 14, fontweight = 'bold')
+plt.title('Top 10 Spotify Artists and their Total Streams', color = 'black', fontsize = 14, fontweight = 'bold')
 plt.grid(linestyle = '--', alpha = 0.5, axis = 'x')
 
 plt.show()
