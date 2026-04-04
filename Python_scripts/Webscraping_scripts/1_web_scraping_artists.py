@@ -1,7 +1,5 @@
 #ensure necessary libraries are installed in the command line using pip install
 #import libraries and website url
-from  bs4 import BeautifulSoup
-import requests as req
 import pandas as pd
 import numpy as np
 url = 'https://kworb.net/spotify/artists.html'
@@ -19,7 +17,6 @@ print(top_artists.head(15))
 #save cleaned dataset to new csv file
 #For analysis, we want only english speaking artists,so we need to remove Bad Bunny, BTS, J Balvin and Ozuna as their song lyrics arent always English
 top_artists.drop(top_artists[top_artists['Artist'].isin(['Bad Bunny', 'BTS', 'J Balvin', 'Ozuna'])].index, inplace=True)
-print(top_artists.head(20))
 #Limit to just the top 10 artists
 top_artists = top_artists.head(10)
 print(top_artists.info())
