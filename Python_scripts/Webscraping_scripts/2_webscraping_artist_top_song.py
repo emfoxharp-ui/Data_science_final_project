@@ -43,8 +43,36 @@ for i in range(len(top_song)):
 #Add the song to a new column in the base_dataset. to do this we first need to make a new column to the dataframe
 base_dataset['Top song'] = top_song
 
-print(base_dataset)
+#We also want to get the corresponding streams for each of these songs
+#we need to get the context of the webpage in text and then split it into lines. go through each line and for the first time each artists comes up take that song
+streams = soup.text
+streams = streams.splitlines()
+song_streams = []
+for person in base_dataset['Artist']:
+    for line in streams:
+        if person in line:
+            song_streams.append(line)
+            break
+        else:
+            continue
 
+#We want to loop through song_streams and remove all non-digit characters
+streams = []
+for line in song_streams:
+    streams.append(re.sub(r'\D','',line))
+
+#we need these streams to be in millions.
+#transform from string to float
+streams_millions = []
+for number in streams:
+    number = float(number)
+    number = number/1000000
+    streams_millions.append(number)
+#print(streams_millions)
+print(song_streams)
+
+table = soup.find('table', class_='addpos sortable')
+print(table)
 #save the dataset as cleaned_top_spotify_artist_song
 base_dataset.to_csv('./Data_science_final_project/Datasets/Cleaned_datasets/cleaned_top_spotify_artists_song.csv')
 
