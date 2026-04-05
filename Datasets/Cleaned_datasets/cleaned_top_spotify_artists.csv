@@ -1,11 +1,11 @@
-,Artist,Streams (millions)
-0,Drake,130513.1
-1,Taylor Swift,122996.6
-3,The Weeknd,92107.6
-4,Justin Bieber,72775.6
-5,Ariana Grande,65235.0
-6,Travis Scott,63369.4
-7,Ed Sheeran,63119.8
-8,Eminem,62948.3
-9,Kanye West,62433.8
-10,Rihanna,57635.2
+,Artist,Streams (millions),Top Song,Song Streams (in millions),Gender
+0,Drake,130513.1,One Dance,5354.852629,male
+1,Taylor Swift,122996.6,Cruel Summer,4847.83223,female
+3,The Weeknd,92107.6,Blinding Lights,4503.650045,male
+4,Justin Bieber,72775.6,Love Yourself,4459.896498,male
+5,Ariana Grande,65235.0,7 rings,4337.708778,female
+6,Travis Scott,63369.4,goosebumps,4278.995171,male
+7,Ed Sheeran,63119.8,Shape of You,4187.349027,male
+8,Eminem,62948.3,Without Me,4144.147348,male
+9,Kanye West,62433.8,Heartless,3900.997932,male
+10,Rihanna,57635.2,Umbrella,3847.282187,female

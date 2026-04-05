@@ -5,8 +5,8 @@ import re as re
 import pandas as pd
 import numpy as np
 import time
-#Need_cleaned_top_spotify_artists_song_gender.csv
-dataset = pd.read_csv('./Data_science_final_project/Datasets/Cleaned_datasets/cleaned_top_spotify_artists_song_gender.csv')
+#Need_cleaned_top_spotify_artists.csv
+dataset = pd.read_csv('./Data_science_final_project/Datasets/Cleaned_datasets/cleaned_top_spotify_artists.csv')
 
 #add urls to the dataset
 url = ['https://www.azlyrics.com/lyrics/drake/onedance.html','https://www.azlyrics.com/lyrics/taylorswift/cruelsummer.html','https://www.azlyrics.com/lyrics/weeknd/blindinglights.html','https://www.azlyrics.com/lyrics/justinbieber/loveyourself.html','https://www.azlyrics.com/lyrics/arianagrande/7rings.html','https://www.azlyrics.com/lyrics/travisscott/goosebumps.html','https://www.azlyrics.com/lyrics/edsheeran/shapeofyou.html','https://www.azlyrics.com/lyrics/eminem/withoutme.html','https://www.azlyrics.com/lyrics/kanyewest/heartless.html','https://www.azlyrics.com/lyrics/rihanna/umbrella.html']
@@ -44,5 +44,10 @@ for webpage in url:
 
 dataset['word count'] = word_count
 
+#clean uo dataset
+dataset.drop(columns = ['Unnamed: 0'], inplace = True)
 
 print(dataset)
+
+#Save dataset to csv file
+dataset.to_csv('./Data_science_final_project/Datasets/Cleaned_datasets/cleaned_top_spotify_artists_lyrics.csv')
