@@ -20,7 +20,7 @@ for webpage in url:
     response = req.get(webpage)
     soup = BeautifulSoup(response.text, 'html.parser')
     #add 3 second time delay to not overwhelm website
-    time.sleep(3)
+    time.sleep(1)
     #find lyrics from the page
 
     lyrics = soup.find_all('div', class_=None)

@@ -30,8 +30,9 @@ table_streams = table_streams[['Artist and Title', 'Streams']]
 #Loop through artists in top_artists dataframe, and find the first row with that artist in the table_streams dataframe
 top_song = []
 streams = []
-count = 0
+#for loop goes through each artist and for each artist it goes through each row in the dataframe and checks for a match the nadds the necessary info to lists
 for person in top_artists['Artist']:
+    count = 0
     for row in table_streams['Artist and Title']:
             if person in row:
                top_song.append(row)
@@ -39,8 +40,8 @@ for person in top_artists['Artist']:
                streams.append(float(table_streams['Streams'].iloc[count])/1000000)
                break
             else:
+                count += 1
                 continue
-    count += 1
 #We only want the song name, so need to remove the artist and '-'
 
 for i in range(len(top_song)):
@@ -67,11 +68,10 @@ for artist in top_artists['Artist']:
     else:
         gender.append('male')
 
-
 #add these things to dataframe
 
 top_artists['Top Song'] = top_song
-top_artists['Song Streams (in millions)'] = streams
+top_artists['Song Streams (millions)'] = streams
 top_artists['Gender'] = gender
 
 print(top_artists)
@@ -81,3 +81,4 @@ top_artists.to_csv('./Data_science_final_project/Datasets/Cleaned_datasets/clean
 
 
 
+print(streams)

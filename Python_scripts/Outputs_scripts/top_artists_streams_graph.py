@@ -12,11 +12,11 @@ top_artists.sort_values('Streams (millions)', ascending = True, inplace=True)
 #make the bar graph with artist names on the y axis and total streams on the x axis
 plt.figure()
 plt.barh(top_artists['Artist'], top_artists['Streams (millions)'], color = 'lightgreen')
-
 #add labels, title and gridlines
 plt.xlabel('Total Streams (millions)', fontweight = 'bold')
 plt.ylabel('Artist', fontweight = 'bold')
 plt.title('Top 10 Spotify Artists and their Total Streams', color = 'black', fontsize = 14, fontweight = 'bold')
 plt.grid(linestyle = '--', alpha = 0.5, axis = 'x')
+plt.xticks(np.arange(0,140000,10000))
 
 plt.show()
