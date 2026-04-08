@@ -1,11 +1,11 @@
-,Artist,Streams (millions),Top Song,Song Streams (millions),Gender,URL,word count
-0,Drake,130560.8,One Dance,4146.243189,male,https://www.azlyrics.com/lyrics/drake/onedance.html,394
-1,Taylor Swift,123042.7,Cruel Summer,3304.553709,female,https://www.azlyrics.com/lyrics/taylorswift/cruelsummer.html,447
-2,The Weeknd,92140.6,Blinding Lights,5356.250611,male,https://www.azlyrics.com/lyrics/weeknd/blindinglights.html,259
-3,Justin Bieber,72800.7,Love Yourself,3121.882057,male,https://www.azlyrics.com/lyrics/justinbieber/loveyourself.html,448
-4,Ariana Grande,65257.0,7 rings,2784.113755,female,https://www.azlyrics.com/lyrics/arianagrande/7rings.html,490
-5,Travis Scott,63390.9,goosebumps,3099.419681,male,https://www.azlyrics.com/lyrics/travisscott/goosebumps.html,554
-6,Ed Sheeran,63136.6,Shape of You,4849.310915,male,https://www.azlyrics.com/lyrics/edsheeran/shapeofyou.html,682
-7,Eminem,62966.6,Without Me,3030.418668,male,https://www.azlyrics.com/lyrics/eminem/withoutme.html,731
-8,Kanye West,62471.4,Heartless,1950.388393,male,https://www.azlyrics.com/lyrics/kanyewest/heartless.html,462
-9,Rihanna,57657.5,Umbrella,2184.843691,female,https://www.azlyrics.com/lyrics/rihanna/umbrella.html,487
+URL,Artist,Streams (millions),Top Song,Song Streams (millions),Gender,word count
+https://www.azlyrics.com/lyrics/drake/onedance.html,Drake,130560.8,One Dance,4146.243189,male,394
+https://www.azlyrics.com/lyrics/taylorswift/cruelsummer.html,Taylor Swift,123042.7,Cruel Summer,3304.553709,female,447
+https://www.azlyrics.com/lyrics/weeknd/blindinglights.html,The Weeknd,92140.6,Blinding Lights,5356.250611,male,259
+https://www.azlyrics.com/lyrics/justinbieber/loveyourself.html,Justin Bieber,72800.7,Love Yourself,3121.882057,male,448
+https://www.azlyrics.com/lyrics/arianagrande/7rings.html,Ariana Grande,65257.0,7 rings,2784.113755,female,490
+https://www.azlyrics.com/lyrics/travisscott/goosebumps.html,Travis Scott,63390.9,goosebumps,3099.419681,male,554
+https://www.azlyrics.com/lyrics/edsheeran/shapeofyou.html,Ed Sheeran,63136.6,Shape of You,4849.310915,male,682
+https://www.azlyrics.com/lyrics/eminem/withoutme.html,Eminem,62966.6,Without Me,3030.418668,male,731
+https://www.azlyrics.com/lyrics/kanyewest/heartless.html,Kanye West,62471.4,Heartless,1950.388393,male,462
+https://www.azlyrics.com/lyrics/rihanna/umbrella.html,Rihanna,57657.5,Umbrella,2184.843691,female,487

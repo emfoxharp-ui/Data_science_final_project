@@ -12,6 +12,8 @@ dataset = pd.read_csv('./Data_science_final_project/Datasets/Cleaned_datasets/cl
 #add urls to the dataset
 url = ['https://www.azlyrics.com/lyrics/drake/onedance.html','https://www.azlyrics.com/lyrics/taylorswift/cruelsummer.html','https://www.azlyrics.com/lyrics/weeknd/blindinglights.html','https://www.azlyrics.com/lyrics/justinbieber/loveyourself.html','https://www.azlyrics.com/lyrics/arianagrande/7rings.html','https://www.azlyrics.com/lyrics/travisscott/goosebumps.html','https://www.azlyrics.com/lyrics/edsheeran/shapeofyou.html','https://www.azlyrics.com/lyrics/eminem/withoutme.html','https://www.azlyrics.com/lyrics/kanyewest/heartless.html','https://www.azlyrics.com/lyrics/rihanna/umbrella.html']
 dataset['URL'] = url
+#Set row index to URL column as this will be used later
+dataset.set_index('URL', inplace = True)
 
 #Loop through urls in dataset to produce lyric count for each
 
@@ -35,16 +37,21 @@ for webpage in url:
     words = re.sub(r'[^\w\s]','',words)
     #Make everything lowercase
     words = words.lower()
-
-
-    #We want to make this into a dataframe that tells us the word count for each word in the lyrics
-    #To start, we must separate the string into a list of words
+    #Split words into a list of words
     words = words.split()
+
+
+    #For each song, we want to add the word and the frequency to a table in sql that also has an id linking it to the song in the other table
+    #We want to make this into a dataframe that tells us the word count for each word in the lyrics
     word_count.append(len(words))
 
     unique_words = list(set(words))
-    individual_word = []
-    frequency_of_word = []
+
+
+    #get the artist based on the webpage URL
+    id =  dataset.at[webpage, 'Artist']
+    print(id)
+
     #for each word in the list words, rest the count to 0
     for word in unique_words:
         count = 0
@@ -52,17 +59,21 @@ for webpage in url:
             if word == it:
                 count += 1
                 continue
-        individual_word.append(word)
-        frequency_of_word.append(count)
-    words_dataframe = pd.DataFrame({'Word': individual_word,'Frequency': frequency_of_word})
-    
-    #Add data into a database in SQL:
-    #Open database connection
-    with sqlite3.connect('song_lyrics.db') as connection:
-        curser = connection.curser()
+        #Add word into into a table in SQL database:
+        #Open database connection
+        with sqlite3.connect('song_lyrics.db') as connection:
+            cursor = connection.cursor()
+            insert_word_query = '''
+                INSERT INTO lyrics(lyric_id, word, frequency)
+                VALUES((SELECT artist_id FROM song WHERE artist == ?),?,?);
+                ''' 
+            data = (id, word,count)
+            cursor.execute(insert_word_query, data)
 
-        connection.commit()
+            
 
+
+connection.commit()
     
 
 dataset['word count'] = word_count

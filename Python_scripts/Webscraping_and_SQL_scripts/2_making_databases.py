@@ -9,25 +9,33 @@ main_dataset = pd.read_csv('Data_science_final_project/Datasets/Cleaned_datasets
 with sqlite3.connect('song_lyrics.db') as connection:
         cursor = connection.cursor()
         #make first table for artist and song and gender:
+        empty_song_table_query = '''
+        DROP TABLE IF EXISTS song;
+        '''
         create_artist_table_query = '''
-        CREATE TABLE IF NOT EXISTS song(
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            CREATE TABLE IF NOT EXISTS song(
+            artist_id INTEGER PRIMARY KEY AUTOINCREMENT,
             artist TEXT NOT NULL,
             song TEXT NOT NULL,
             gender TEXT NOT NULL
             );
             '''
+        cursor.execute(empty_song_table_query)
         cursor.execute(create_artist_table_query)
 
         #make second table for song lyrics, connecting each word to the id of the song they come from
+        empty_lyrics_table_query = '''
+        DROP TABLE IF EXISTS lyrics;
+        '''
         create_lyrics_table_query = '''
-        CREATE TABLE IF NOT EXISTS lyrics(
-            id INTEGER PRIMARY KEY,
+            CREATE TABLE IF NOT EXISTS lyrics(
+            lyric_id INTEGER NOT NULL,
             word TEXT NOT NULL,
-            frequency INTEGER
+            frequency INTEGER NOT NULL,
+            FOREIGN KEY (lyric_id) REFERENCES song(artist_id)
             );
             '''
-        cursor.execute(create_artist_table_query)
+        cursor.execute(empty_lyrics_table_query)
         cursor.execute(create_lyrics_table_query)
         #Commit changes
         connection.commit()
