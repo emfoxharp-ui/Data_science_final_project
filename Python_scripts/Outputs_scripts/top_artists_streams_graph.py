@@ -21,17 +21,17 @@ top_artists.sort_values('total_streams', ascending = True, inplace=True)
 fig = plt.figure()
 ax = fig.add_subplot()
 ax2 = ax.twiny()
-top_artists.total_streams.plot(kind = 'barh',color = 'lightgreen',ax = ax, position = 0, width = 0.4)
-top_artists.song_streams.plot(kind = 'barh', color = 'green', ax = ax2, position = 1, width = 0.4)
+top_artists.total_streams.plot(kind = 'barh',color = '#5dde5b',ax = ax2, position = 0, width = 0.4)
+top_artists.song_streams.plot(kind = 'barh', color = '#4c97d9', ax = ax, position = 1, width = 0.4)
 
 #add labels, title, gridlines, legends, and set ticks
-ax.set_xlabel('Top Song Streams (10 millions)', fontweight = 'bold')
-ax2.set_xlabel('Total Streams (millions)', fontweight = 'bold')
+ax.set_xlabel('Top Song Streams (millions)', fontweight = 'bold', color = '#4c97d9')
+ax2.set_xlabel('Total Streams (millions)', fontweight = 'bold', color = '#5dde5b')
 plt.ylabel('Artist', fontweight = 'bold')
 
 ax.set_yticks(ticks= range(0,10), labels= top_artists['Artist and Song'], minor=False)
-ax.set_xticks(np.arange(0,140000,10000))
-ax2.set_xticks(np.arange(0,7000, 500))
+ax2.set_xticks(np.arange(0,140000,10000))
+ax.set_xticks(np.arange(0,7000, 500))
 
 plt.title('Top 10 Spotify Artists and their Total Streams', color = 'black', fontsize = 14, fontweight = 'bold')
 plt.grid(linestyle = '--', alpha = 0.5, axis = 'x')
