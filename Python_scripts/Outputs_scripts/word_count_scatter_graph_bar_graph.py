@@ -47,8 +47,8 @@ for i, txt in enumerate(word_count_df[0]):
 plt.title('Total Word Count and Unique Word Count', fontsize = 14, fontweight = 'bold')
 plt.xticks(np.arange(250,800, 25))
 plt.yticks(np.arange(50,350,25))
-plt.xlabel('Total Word Count')
-plt.ylabel('Unique Word Count')
+plt.xlabel('Total Word Count', fontweight = 'bold')
+plt.ylabel('Unique Word Count', fontweight = 'bold')
 plt.grid(linestyle = '--', alpha = 0.5)
 
 
@@ -60,7 +60,11 @@ percentage = []
 for i,txt in enumerate(word_count_df[0]):
     percentage.append((unique_word_count[i]/word_count[i])*100)
 
-plt.bar(word_count_df[0], percentage, color = '#4c97d9')
+#set the order of the bars in descending order
+word_count_df['percentage'] = percentage
+word_count_df.sort_values(by= 'percentage', ascending = False, inplace = True)
+
+plt.bar(word_count_df[0], word_count_df['percentage'], color = '#4c97d9')
 plt.title('Unique words as a Percentage of Total Words', fontsize = 14, fontweight = 'bold')
 plt.xlabel('Artist', fontweight = 'bold')
 plt.ylabel('Percentage of Words That Are Unique', fontweight = 'bold')
