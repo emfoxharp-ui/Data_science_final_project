@@ -64,8 +64,8 @@ for webpage in url:
         with sqlite3.connect('song_lyrics.db') as connection:
             cursor = connection.cursor()
             insert_word_query = '''
-                INSERT INTO lyrics(lyric_id, word, frequency)
-                VALUES((SELECT artist_id FROM song WHERE artist == ?),?,?);
+                INSERT INTO lyrics(song_id, word, frequency)
+                VALUES((SELECT song_id FROM song WHERE artist == ?),?,?);
                 ''' 
             data = (id, word,count)
             cursor.execute(insert_word_query, data)

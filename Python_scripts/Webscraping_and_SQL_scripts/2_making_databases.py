@@ -14,7 +14,7 @@ with sqlite3.connect('song_lyrics.db') as connection:
         '''
         create_artist_table_query = '''
             CREATE TABLE IF NOT EXISTS song(
-            artist_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            song_id INTEGER PRIMARY KEY AUTOINCREMENT,
             artist TEXT NOT NULL,
             song TEXT NOT NULL,
             gender TEXT NOT NULL
@@ -29,10 +29,10 @@ with sqlite3.connect('song_lyrics.db') as connection:
         '''
         create_lyrics_table_query = '''
             CREATE TABLE IF NOT EXISTS lyrics(
-            lyric_id INTEGER NOT NULL,
+            song_id INTEGER NOT NULL,
             word TEXT NOT NULL,
             frequency INTEGER NOT NULL,
-            FOREIGN KEY (lyric_id) REFERENCES song(artist_id)
+            FOREIGN KEY (song_id) REFERENCES song(song_id)
             );
             '''
         cursor.execute(empty_lyrics_table_query)

@@ -1,18 +1,16 @@
-#Create Wordcount showing most popular words across the songs
-#import libraries
-import numpy as np
-import pandas as pd
 from wordcloud import WordCloud
+import pandas as pd
 import matplotlib.pyplot as plt
 import sqlite3
 
 #open sql connection
 with sqlite3.connect('song_lyrics.db') as connection:
     cursor = connection.cursor()
-    #make query to select words and frequency from lyrics
+    #make queries to select words and frequency from lyrics
     select_words_query = '''
     SELECT word, frequency
-    FROM lyrics;
+    FROM lyrics l , song s
+    WHERE s.gender = 'female' AND l.song_id = s.song_id ;
     '''
     #In order for our results to be interesting and tell us something, we want to disclude conjunctions and common words like the, and, a, and etc.
     eliminate = ['the','but','can','this','if','youre','and','a','to','of','in','is','you','that','it','for','an', 'was', 'on', 'i', 'me', 'its','with','just','my','im','your','we','be','your','get','got','so']
