@@ -6,8 +6,19 @@ import pandas as pd
 import numpy as np
 import time
 import sqlite3
-#Need_cleaned_top_spotify_artists.csv
-dataset = pd.read_csv('./Data_science_final_project/Datasets/Cleaned_datasets/cleaned_top_spotify_artists.csv')
+
+with sqlite3.connect('song_lyrics.db') as connection:
+    cursor = connection.cursor()
+    artist_query = '''
+    SELECT artist
+    FROM song;
+    '''
+    #ensure lrics table is empty to not end up with duplicates
+    lyrics_clear_query = '''
+    DELETE FROM lyrics;
+    '''
+    cursor.execute(lyrics_clear_query)
+    dataset = pd.DataFrame(cursor.execute(artist_query))
 
 #add urls to the dataset
 url = ['https://www.azlyrics.com/lyrics/drake/onedance.html','https://www.azlyrics.com/lyrics/taylorswift/cruelsummer.html','https://www.azlyrics.com/lyrics/weeknd/blindinglights.html','https://www.azlyrics.com/lyrics/justinbieber/loveyourself.html','https://www.azlyrics.com/lyrics/arianagrande/7rings.html','https://www.azlyrics.com/lyrics/travisscott/goosebumps.html','https://www.azlyrics.com/lyrics/edsheeran/shapeofyou.html','https://www.azlyrics.com/lyrics/eminem/withoutme.html','https://www.azlyrics.com/lyrics/kanyewest/heartless.html','https://www.azlyrics.com/lyrics/rihanna/umbrella.html']
@@ -49,7 +60,7 @@ for webpage in url:
 
 
     #get the artist based on the webpage URL
-    id =  dataset.at[webpage, 'Artist']
+    id =  dataset.at[webpage, 0]
     print(id)
 
     #for each word in the list words, rest the count to 0
@@ -70,17 +81,4 @@ for webpage in url:
             data = (id, word,count)
             cursor.execute(insert_word_query, data)
 
-            
-
-
 connection.commit()
-    
-
-dataset['word count'] = word_count
-
-#clean up dataset
-dataset.drop(columns = ['Unnamed: 0'], inplace = True)
-
-
-#Save dataset to csv file as backup
-dataset.to_csv('./Data_science_final_project/Datasets/Cleaned_datasets/cleaned_top_spotify_artists_lyrics.csv')

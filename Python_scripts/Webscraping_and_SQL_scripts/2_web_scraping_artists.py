@@ -3,6 +3,7 @@
 import pandas as pd
 import numpy as np
 import re
+import sqlite3
 url = 'https://kworb.net/spotify/artists.html'
 #from url, get the table of artists and their streams
 table = pd.read_html(url)[0]
@@ -73,12 +74,25 @@ for artist in top_artists['Artist']:
 top_artists['Top Song'] = top_song
 top_artists['Song Streams (millions)'] = streams
 top_artists['Gender'] = gender
+top_artists = top_artists.reset_index()
 
 print(top_artists)
-
-top_artists.to_csv('./Data_science_final_project/Datasets/Cleaned_datasets/cleaned_top_spotify_artists.csv')
-
-
-
-
-print(streams)
+#Save data in SQL database
+with sqlite3.connect('song_lyrics.db') as connection:
+    cursor = connection.cursor()
+    #ensure table begins clear so not to end up with duplicates
+    clear_table_query = '''
+    DELETE FROM song;
+    '''
+    cursor.execute(clear_table_query)
+    count = 0
+    for artist in top_artists['Artist']:
+        insert_artist_query = '''
+        INSERT INTO song(artist, total_streams, song, song_streams, gender)
+        VALUES(?,?,?,?,?);
+        ''' 
+        data = (artist, top_artists['Streams (millions)'][count], top_artists['Top Song'][count],top_artists['Song Streams (millions)'][count], top_artists['Gender'][count])
+        count += 1
+        cursor.execute(insert_artist_query, data)
+    connection.commit()
+    print('succesful')

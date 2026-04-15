@@ -14,10 +14,10 @@ with sqlite3.connect('song_lyrics.db') as connection:
     unique_count_query = '''
     SELECT frequency 
     FROM lyrics
-    WHERE lyric_id = ?;
+    WHERE song_id = ?;
     '''
     artist_query = '''
-    SELECT artist, artist_id
+    SELECT artist, song_id
     FROM song;
     '''
     word_count_df = pd.DataFrame((cursor.execute(artist_query)).fetchall())

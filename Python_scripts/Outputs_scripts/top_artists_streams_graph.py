@@ -3,15 +3,23 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-top_artists = pd.read_csv('./Data_science_final_project/Datasets/Cleaned_datasets/cleaned_top_spotify_artists.csv')
+import sqlite3
+
+#Open SQL database connection and extracting the necessary columns
+with sqlite3.connect('song_lyrics.db') as connection:
+    cursor = connection.cursor()
+    streams_query = '''
+    SELECT artist, total_streams, song, song_streams
+    FROM song;
+    '''
+
+top_artists = pd.DataFrame((cursor.execute(streams_query)).fetchall())
 
 #Want one column with artist and song name
-top_artists['Artist and Song'] = top_artists['Artist'] + ' - ' + top_artists['Top Song']
+top_artists['Artist and Song'] = top_artists[0] + ' - ' + top_artists[2]
 
-#Limit dataframe to just song and artist, total streams, and song streams
-top_artists = top_artists [['Artist and Song', 'Streams (millions)', 'Song Streams (millions)']]
 #rename the columns to one word names to make them easier to use
-top_artists.rename(columns= {'Streams (millions)': 'total_streams', 'Song Streams (millions)': 'song_streams'}, inplace = True)
+top_artists.rename(columns= {1: 'total_streams', 3: 'song_streams'}, inplace = True)
 top_artists.set_index('Artist and Song')
 
 #Sort artists from lowest to highest streams
