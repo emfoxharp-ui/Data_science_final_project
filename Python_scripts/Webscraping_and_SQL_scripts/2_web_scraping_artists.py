@@ -69,11 +69,16 @@ for artist in top_artists['Artist']:
     else:
         gender.append('male')
 
+
+#Manually add the genre of each artist
+genre = ['R&B','pop','pop','pop','pop','hip hop','pop','hip hop','hip hop', 'pop']
+
 #add these things to dataframe
 
 top_artists['Top Song'] = top_song
 top_artists['Song Streams (millions)'] = streams
 top_artists['Gender'] = gender
+top_artists['Genre'] = genre
 top_artists = top_artists.reset_index()
 
 print(top_artists)
@@ -88,10 +93,10 @@ with sqlite3.connect('song_lyrics.db') as connection:
     count = 0
     for artist in top_artists['Artist']:
         insert_artist_query = '''
-        INSERT INTO song(artist, total_streams, song, song_streams, gender)
-        VALUES(?,?,?,?,?);
+        INSERT INTO song(artist, total_streams, song, song_streams, gender, genre)
+        VALUES(?,?,?,?,?,?);
         ''' 
-        data = (artist, top_artists['Streams (millions)'][count], top_artists['Top Song'][count],top_artists['Song Streams (millions)'][count], top_artists['Gender'][count])
+        data = (artist, top_artists['Streams (millions)'][count], top_artists['Top Song'][count],top_artists['Song Streams (millions)'][count], top_artists['Gender'][count], top_artists['Genre'][count])
         count += 1
         cursor.execute(insert_artist_query, data)
     connection.commit()

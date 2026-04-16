@@ -74,5 +74,4 @@ ax[1].imshow(wordcloud_female, interpolation = 'bilinear')
 ax[1].set_title('Female Artists', fontweight = 'bold')
 ax[0].axis('off')
 ax[1].axis('off')
-ax
 plt.show()

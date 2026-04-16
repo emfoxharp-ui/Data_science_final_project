@@ -16,7 +16,8 @@ with sqlite3.connect('song_lyrics.db') as connection:
             total_streams INTEGER NOT NULL,
             song TEXT NOT NULL,
             song_streams INTEGER NOT NULL,
-            gender TEXT NOT NULL
+            gender TEXT NOT NULL,
+            genre TEXT NOT NULL
             );
             '''
         cursor.execute(empty_song_table_query)
