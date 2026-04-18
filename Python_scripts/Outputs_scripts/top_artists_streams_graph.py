@@ -38,8 +38,8 @@ ax2.set_xlabel('Total Streams (millions)', fontweight = 'bold', color = '#5dde5b
 plt.ylabel('Artist', fontweight = 'bold')
 
 ax.set_yticks(ticks= range(0,10), labels= top_artists['Artist and Song'], minor=False)
-ax2.set_xticks(np.arange(0,140000,10000))
-ax.set_xticks(np.arange(0,7000, 500))
+ax2.set_xticks(np.arange(0,150000,10000))
+ax.set_xticks(np.arange(0,7500, 500))
 
 plt.title('Top 10 Spotify Artists and their Total Streams', color = 'black', fontsize = 14, fontweight = 'bold')
 plt.grid(linestyle = '--', alpha = 0.5, axis = 'x')

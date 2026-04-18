@@ -57,7 +57,7 @@ axs[0].set_xticklabels(labels =np.arange(250,800, 25), rotation = 'vertical')
 percentage = []
 for i,txt in enumerate(word_count_df[0]):
     percentage.append((unique_word_count[i]/word_count[i])*100)
-
+print(percentage)
 #set the order of the bars in descending order
 word_count_df['percentage'] = percentage
 word_count_df.sort_values(by= 'percentage', ascending = False, inplace = True)
