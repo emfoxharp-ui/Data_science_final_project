@@ -14,14 +14,13 @@ with sqlite3.connect('song_lyrics.db') as connection:
     SELECT word, frequency
     FROM lyrics;
     '''
-    #In order for our results to be interesting and tell us something, we want to disclude conjunctions and common words like the, and, a, and etc.
+    #In order for our results to provide useful insights, we want to disclude conjunctions and common words like the, and, a, and etc.
     eliminate = ['oh','eh','ill','ooh','eh','yeah','the','but','can','this','if','youre','and','a','to','of','in','is','you','that','it','for','an', 'was', 'on', 'i', 'me', 'its','with','just','my','im','your','we','be','your','get','got','so']
     
     #make dataframe of words
     common_words_df = pd.DataFrame(cursor.execute(select_words_query).fetchall()).groupby(0, as_index = False).sum().sort_values(by = 1,ascending = False)
     
     #Make original wordcloud for comparison
-    
     common_words_df_original = common_words_df.head(30).reset_index()
     frequencies_original = {}
     #make string for word cloud cleaned
@@ -31,8 +30,6 @@ with sqlite3.connect('song_lyrics.db') as connection:
 
     #Create wordcloud object
     wordcloud_original = WordCloud(width = 1000, height = 1000, margin = 0, background_color = 'white').generate_from_frequencies(frequencies_original)
-    
-
     
     #make cleaned wordcloud
     common_words_df_cleaned = common_words_df
@@ -54,16 +51,17 @@ with sqlite3.connect('song_lyrics.db') as connection:
     #Create wordcloud object
     wordcloud_cleaned = WordCloud(width = 1000, height = 1000, margin = 0, background_color = 'white').generate_from_frequencies(frequencies_cleaned)
     
-    fig, ax = plt.subplots(1,2)
+    #make subplots
+fig, ax = plt.subplots(1,2)
+
+#add wordcloud objects and titles
 ax[0].imshow(wordcloud_original, interpolation = 'bilinear')
 ax[0].set_title('Original Lyrics', fontweight = 'bold')
 
 ax[1].imshow(wordcloud_cleaned, interpolation = 'bilinear')
 ax[1].set_title('Cleaned Lyrics', fontweight = 'bold')
+
+#remove axis
 ax[0].axis('off')
 ax[1].axis('off')
 plt.show()
-    #plt.imshow(wordcloud, interpolation = 'bilinear')
-    #plt.axis('off')
-    #plt.margins(x=0,y=0)
-    #plt.show()

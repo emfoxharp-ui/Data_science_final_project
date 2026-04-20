@@ -1,4 +1,5 @@
-#Attempting to loop through lists for webscraping
+#web-scraping lyrics from list of urls and adding them to database
+#import libraries
 from  bs4 import BeautifulSoup
 import requests as req
 import re as re
@@ -7,8 +8,10 @@ import numpy as np
 import time
 import sqlite3
 
+#open database connection
 with sqlite3.connect('song_lyrics.db') as connection:
     cursor = connection.cursor()
+    #get list of artists from song table to be made into dataframe
     artist_query = '''
     SELECT artist
     FROM song;
@@ -17,6 +20,8 @@ with sqlite3.connect('song_lyrics.db') as connection:
     lyrics_clear_query = '''
     DELETE FROM lyrics;
     '''
+    
+    #execute queries and make database from artist query
     cursor.execute(lyrics_clear_query)
     dataset = pd.DataFrame(cursor.execute(artist_query))
 
@@ -81,4 +86,5 @@ for webpage in url:
             data = (id, word,count)
             cursor.execute(insert_word_query, data)
 
+#commit chhanges to database
 connection.commit()

@@ -44,8 +44,7 @@ ax.set_xticks(np.arange(0,7500, 500))
 plt.title('Top 10 Spotify Artists and their Total Streams', color = 'black', fontsize = 14, fontweight = 'bold')
 plt.grid(linestyle = '--', alpha = 0.5, axis = 'x')
 
-ax.legend(('Top Song',), loc = 'center right', fontsize = 'x-large')
-ax2.legend(('Total Streams',),loc = 'lower right', fontsize = 'x-large')
+plt.legend(handles = [ax2.patches[0], ax.patches[0]],labels = ['Total streams','Top Song Streams'],loc = 'lower right', fontsize = 'x-large')
 
 #show graph
 plt.show()

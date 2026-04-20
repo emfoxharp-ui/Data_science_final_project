@@ -14,10 +14,23 @@ with sqlite3.connect('song_lyrics.db') as connection:
     FROM lyrics l, song s
     WHERE (word = 'love' or word = 'baby') AND l.song_id = s.song_id'''
 
+    #make dataframe from query
     love_df = pd.DataFrame(cursor.execute(select_words_query).fetchall(), columns = ['word', 'frequency', 'genre', 'artist'])
+
+    #need to check for missing artist who do not use either word and add them to dataframe with frequency 0
+    select_artists_query = '''
+    SELECT artist, genre
+    FROM song;
+    '''
+    for artist, genre in cursor.execute(select_artists_query).fetchall():
+        if artist not in love_df['artist'].unique():
+            love_df = pd.concat([love_df, pd.DataFrame({'word': ['love', 'baby'], 'frequency': [0,0], 'genre': genre, 'artist': artist})]).reset_index(drop = True)
+    
+    
     #Make bar charts for each genre showing the frequenct for 'love' and 'baby' for each artist and an average across the genre
     #each genre on its own subplot. Stacked bar chart.
     fig, axs = plt.subplots(1,3)
+    #count variable will allow us to cycle through subplots for each genre
     count = 0
     #Want a chart for each genre, so loop through genres
     for genre in love_df['genre'].unique():
@@ -27,8 +40,6 @@ with sqlite3.connect('song_lyrics.db') as connection:
         add_zeros = pd.DataFrame(columns = ['word','frequency','genre','artist'])
         for artist in genre_love_df['artist'].unique():
             for word in ['love','baby']:
-                print(word)
-                print(str(genre_love_df['word'][genre_love_df['artist'] == artist]))
                 if word not in str(genre_love_df['word'][genre_love_df['artist'] == artist]):
                     add_zeros = pd.concat([add_zeros,pd.DataFrame({'word': word,'frequency': 0, 'genre': genre, 'artist': artist}, index = [len(add_zeros)])]).reset_index(drop = True)
                 else:
@@ -39,25 +50,21 @@ with sqlite3.connect('song_lyrics.db') as connection:
         genre_df = genre_love_df[['genre','word','frequency']].groupby(['genre','word'], as_index = False).mean()
         genre_df['artist'] = 'average'
         genre_love_df = pd.concat([genre_love_df, genre_df]).sort_values(by = ['artist','word']).reset_index(drop = True)
-        print(genre_love_df)
         #dictionary of lyric and frequencies
         lyrics = {
             'love': np.array(genre_love_df['frequency'][genre_love_df['word'] == 'love']),
             'baby': np.array(genre_love_df['frequency'][genre_love_df['word'] == 'baby'])
         }
-        print(lyrics.items())
-        print(genre_love_df['artist'].unique())
         
         #make stacked bar graphs
         bottom = 0
         for boolean, frequency in lyrics.items():
-            print('frequency; ', frequency)
             axs[count] = ax.bar(genre_love_df['artist'].unique(), frequency, width = 0.5, label = boolean, bottom = bottom, color = '#5dde5b' if boolean == 'love' else '#4c97d9')
             bottom += frequency
         
         #Format graph
         ax.set_title(genre, fontsize = 14, fontweight = 'bold')
-        ax.set_yticks(np.arange(0,31,5))
+        ax.set_yticks(np.arange(0,41,5))
         ax.minorticks_on()
         ax.set_ylabel('Frequency', fontweight = 'bold')
         ax.set_xlabel('Artist', fontweight = 'bold')

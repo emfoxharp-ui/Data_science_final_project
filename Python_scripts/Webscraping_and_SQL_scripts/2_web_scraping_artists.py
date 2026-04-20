@@ -1,3 +1,4 @@
+#web-scraping for artists, their top song, and the streams for each.
 #ensure necessary libraries are installed in the command line using pip install
 #import libraries and website url
 import pandas as pd
@@ -6,6 +7,7 @@ import re
 import sqlite3
 url = 'https://kworb.net/spotify/artists.html'
 #from url, get the table of artists and their streams
+#as we are reading a table, can use pandas instead of beautiful soup
 table = pd.read_html(url)[0]
 
 #clean data by removing empty rows and columns. Only need artist name and total streams so remove the rest of the columns
@@ -22,6 +24,7 @@ top_artists = top_artists.head(10)
 #From a separate webpage, we want the table of top songs and their streams
 url_2 = 'https://kworb.net/spotify/songs.html#google_vignette'
 
+#read html and make into dataframe
 table_streams = pd.read_html(url_2)[0]
 table_streams = pd.DataFrame(table_streams)
 
@@ -91,6 +94,7 @@ with sqlite3.connect('song_lyrics.db') as connection:
     '''
     cursor.execute(clear_table_query)
     count = 0
+    #loop through artists in dataframe and add each to database
     for artist in top_artists['Artist']:
         insert_artist_query = '''
         INSERT INTO song(artist, total_streams, song, song_streams, gender, genre)

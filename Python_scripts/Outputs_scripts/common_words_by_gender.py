@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import sqlite3
 
 #open sql connection
+#start with male artists
 with sqlite3.connect('song_lyrics.db') as connection:
     cursor = connection.cursor()
     #make queries to select words and frequency from lyrics
@@ -12,7 +13,7 @@ with sqlite3.connect('song_lyrics.db') as connection:
     FROM lyrics l , song s
     WHERE s.gender = 'male' AND l.song_id = s.song_id ;
     '''
-    #In order for our results to be interesting and tell us something, we want to disclude conjunctions and common words like the, and, a, and etc.
+    #In order for our results to provide useful insights, we want to disclude conjunctions and common words like the, and, a, and etc.
     eliminate = ['the','but','can','this','if','youre','and','a','to','of','in','is','you','that','it','for','an', 'was', 'on', 'i', 'me', 'its','with','just','my','im','your','we','be','your','get','got','so']
     #make dataframe of words
     common_words_df = pd.DataFrame(cursor.execute(select_words_query).fetchall()).groupby(0, as_index = False).sum().sort_values(by = 1,ascending = False)
@@ -34,7 +35,7 @@ with sqlite3.connect('song_lyrics.db') as connection:
     #Create wordcloud object
     wordcloud_male = WordCloud(width = 1000, height = 1000, margin = 0, background_color = 'white').generate_from_frequencies(frequencies)
 
-
+#repeat process for female artists
 with sqlite3.connect('song_lyrics.db') as connection:
     cursor = connection.cursor()
     #make queries to select words and frequency from lyrics
@@ -44,7 +45,7 @@ with sqlite3.connect('song_lyrics.db') as connection:
     WHERE s.gender = 'female' AND l.song_id = s.song_id ;
     '''
     #In order for our results to be interesting and tell us something, we want to disclude conjunctions and common words like the, and, a, and etc.
-    eliminate = ['umbrellaâellaâella','uhhuh','oh','ill','ooh','eh','yeah','the','but','can','this','if','youre','and','a','to','of','in','is','you','that','it','for','an', 'was', 'on', 'i', 'me', 'its','with','just','my','im','your','we','be','your','get','got','so']
+    eliminate = ['uhhuh','oh','ill','ooh','eh','yeah','the','but','can','this','if','youre','and','a','to','of','in','is','you','that','it','for','an', 'was', 'on', 'i', 'me', 'its','with','just','my','im','your','we','be','your','get','got','so']
     #make dataframe of words
     common_words_df = pd.DataFrame(cursor.execute(select_words_query).fetchall()).groupby(0, as_index = False).sum().sort_values(by = 1,ascending = False)
     #remove words
@@ -65,13 +66,18 @@ with sqlite3.connect('song_lyrics.db') as connection:
     #Create wordcloud object
     wordcloud_female = WordCloud(width = 1000, height = 1000, margin = 0, background_color = 'white').generate_from_frequencies(frequencies)
 
-
+#make wordclouds.
+#make subplots so both appear on same figure
 fig, ax = plt.subplots(1,2)
+
+#add wordclouds and titles
 ax[0].imshow(wordcloud_male, interpolation = 'bilinear')
 ax[0].set_title('Male Artists', fontweight = 'bold')
 
 ax[1].imshow(wordcloud_female, interpolation = 'bilinear')
 ax[1].set_title('Female Artists', fontweight = 'bold')
+
+#turn of axis
 ax[0].axis('off')
 ax[1].axis('off')
 plt.show()
