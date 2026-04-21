@@ -86,5 +86,6 @@ for webpage in url:
             data = (id, word,count)
             cursor.execute(insert_word_query, data)
 
-#commit chhanges to database
+
+#commit changes to database
 connection.commit()

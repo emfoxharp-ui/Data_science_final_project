@@ -1,9 +1,14 @@
-# Data_science_final_project
+# Data science final project
+Link to Blog:
+
+https://hackmd.io/@CHYs8YVcT_SLArYhsxDSIQ/rJc7eriobg
+
 This project explores the lyrics of the top songs from the top English speaking artists on spotify, taking the most popular song from each of the top 10 artists based on total spotify streams and exploring trends in lyrics across songs, genders, and genres.
 
-This GitHub incluudes a folder of python scripts that can be used to recreate the outputs used in the blog, and a folder of the outputs used in the blog. Within the python scripts folder, there is a 'webscraping and SQL scripts' folder, which include the co and an output scripts folder.
+This GitHub includes a folder of python scripts that can be used to recreate the outputs used in the blog, and a folder of the outputs used in the blog. Within the python scripts folder, there is a 'webscraping and SQL scripts' folder, which include the co and an output scripts folder.
 
-Necessary libraries:
+**Necessary libraries:**
+
 - pandas
 - NumPy
 - matplotlib.pyplot
@@ -13,7 +18,6 @@ Necessary libraries:
 - time
 - requests
 - WordCloud
-- 
 
 
 **Replicating the code:**

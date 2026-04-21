@@ -20,7 +20,10 @@ with sqlite3.connect('song_lyrics.db') as connection:
     SELECT artist, song_id, genre
     FROM song;
     '''
+    #make dataframe from artist query
     word_count_df = pd.DataFrame((cursor.execute(artist_query)).fetchall())
+    
+    #make empty lists to store total and unique word counts
     word_count = []
     unique_word_count = []
 
@@ -32,7 +35,9 @@ with sqlite3.connect('song_lyrics.db') as connection:
 #add to dataframe
 word_count_df['total count'] = word_count
 word_count_df['unique count'] = unique_word_count
-        
+
+print(word_count_df.sort_values(by = 'unique count', ascending = False))   
+
 #We can now maka a scattergraph using this information
 fig, axs = plt.subplots(1,2)
 ax = fig.add_subplot(axs[0])
