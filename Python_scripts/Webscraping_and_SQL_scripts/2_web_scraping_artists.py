@@ -103,5 +103,13 @@ with sqlite3.connect('song_lyrics.db') as connection:
         data = (artist, top_artists['Streams (millions)'][count], top_artists['Top Song'][count],top_artists['Song Streams (millions)'][count], top_artists['Gender'][count], top_artists['Genre'][count])
         count += 1
         cursor.execute(insert_artist_query, data)
+
+    #save backup csv file
+    select_query = '''
+    SELECT *
+    FROM song;
+    '''
+    song_backup = pd.DataFrame(cursor.execute(select_query).fetchall())
+    song_backup.to_csv('song_backup.csv', index=False)
     connection.commit()
     print('succesful')
