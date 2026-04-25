@@ -68,13 +68,19 @@ for webpage in url:
     id =  dataset.at[webpage, 0]
     print(id)
 
+    #due to formating issues, 'umbrella-ella-ella' is appearing wrong in the lyrics. Hard code to replace this with 'umbrella-ella-ella'
     #for each word in the list words, rest the count to 0
     for word in unique_words:
+        if word == 'umbrellaâellaâella':
+            word = 'umbrella-ella-ella'
         count = 0
         for it in words:
+            if it == 'umbrellaâellaâella':
+                    it = 'umbrella-ella-ella'
             if word == it:
                 count += 1
-                continue
+                continue    
+                
         #Add word into into a table in SQL database:
         #Open database connection
         with sqlite3.connect('song_lyrics.db') as connection:
@@ -85,7 +91,7 @@ for webpage in url:
                 ''' 
             data = (id, word,count)
             cursor.execute(insert_word_query, data)
-
-
+    
 #commit changes to database
 connection.commit()
+

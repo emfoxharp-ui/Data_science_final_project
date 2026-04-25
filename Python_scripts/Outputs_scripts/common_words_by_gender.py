@@ -14,7 +14,7 @@ with sqlite3.connect('song_lyrics.db') as connection:
     WHERE s.gender = 'male' AND l.song_id = s.song_id ;
     '''
     #In order for our results to provide useful insights, we want to disclude conjunctions and common words like the, and, a, and etc.
-    eliminate = ['the','but','can','this','if','youre','and','a','to','of','in','is','you','that','it','for','an', 'was', 'on', 'i', 'me', 'its','with','just','my','im','your','we','be','your','get','got','so']
+    eliminate = ['oh','the','but','can','this','if','youre','and','a','to','of','in','is','you','that','it','for','an', 'was', 'on', 'i', 'me', 'its','with','just','my','im','your','we','be','your','get','got','so']
     #make dataframe of words
     common_words_df = pd.DataFrame(cursor.execute(select_words_query).fetchall()).groupby(0, as_index = False).sum().sort_values(by = 1,ascending = False)
     #remove words
