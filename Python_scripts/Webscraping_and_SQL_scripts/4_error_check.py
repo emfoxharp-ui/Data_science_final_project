@@ -5,7 +5,7 @@ import numpy as np
 
 
 #get datasets from csv files
-songs_df = pd.read_csv('Data_Science_final_project-main/SQL_backup/top_artists.csv')
+songs_df = pd.read_csv('Data_Science_final_project-main/SQL_backup/song_backup.csv')
 lyrics_df = pd.read_csv('Data_Science_final_project-main/SQL_backup/lyrics.csv')
 
 with sqlite3.connect('song_lyrics.db') as connection:
