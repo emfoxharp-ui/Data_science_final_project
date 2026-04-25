@@ -5,8 +5,8 @@ import numpy as np
 
 
 #get datasets from csv files
-songs_df = pd.read_csv('SQL_backup/top_artists.csv')
-lyrics_df = pd.read_csv('SQL_backup/lyrics.csv')
+songs_df = pd.read_csv('Data_Science_final_project-main/SQL_backup/top_artists.csv')
+lyrics_df = pd.read_csv('Data_Science_final_project-main/SQL_backup/lyrics.csv')
 
 with sqlite3.connect('song_lyrics.db') as connection:
     cursor = connection.cursor()
@@ -14,7 +14,7 @@ with sqlite3.connect('song_lyrics.db') as connection:
     check_lyrics_query = '''
     SELECT COUNT(*)
     FROM lyrics;
-'''
+    '''
 count = cursor. execute(check_lyrics_query).fetchall()[0][0]
 print(count)
 
