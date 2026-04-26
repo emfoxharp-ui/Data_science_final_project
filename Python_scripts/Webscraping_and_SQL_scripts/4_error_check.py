@@ -3,11 +3,6 @@ import sqlite3
 import pandas as pd
 import numpy as np
 
-
-#get datasets from csv files
-songs_df = pd.read_csv('Data_Science_final_project-main/SQL_backup/song_backup.csv')
-lyrics_df = pd.read_csv('Data_Science_final_project-main/SQL_backup/lyrics.csv')
-
 with sqlite3.connect('song_lyrics.db') as connection:
     cursor = connection.cursor()
     #The database should have 1582 entries in the lyrics table. if it doesnt, replace with the backup
@@ -23,6 +18,9 @@ if count == 1582:
     print('webscraping successful')
 else:
     print('webscraping unsuccessful, replace with backup database')
+    #get datasets from csv files
+    songs_df = pd.read_csv('Data_Science_final_project-main/SQL_backup/song_backup.csv')
+    lyrics_df = pd.read_csv('Data_Science_final_project-main/SQL_backup/lyrics.csv')
     #replace with backup database
     #open connection to song_lyrics.db and replace tables with backup tables
     with sqlite3.connect('song_lyrics.db') as connection:
